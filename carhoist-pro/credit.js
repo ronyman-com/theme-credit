@@ -12,14 +12,25 @@
           if (footerText) {
             footerText.innerHTML = footerText.innerHTML.replace(
               /Powered by.*?Design and manage by.*?\./,
-              `Powered by <span class="theme-credit" data-theme="${themeName}">Ynor</span>. Design and manage by <span class="theme-credit" data-theme="${themeName}">Ronyman</span>.`
+              `Powered by <a href="https://ynor.app" target="_blank" rel="noopener" class="theme-credit" data-theme="${themeName}">Ynor</a>. Design and manage by <a href="https://ronyman.com" target="_blank" rel="noopener" class="theme-credit" data-theme="${themeName}">Ronyman</a>.`
             );
           }
         }
         
-        // Verify data-theme attribute
+        // Verify data-theme attribute and links
         if (credit.getAttribute('data-theme') !== themeName) {
           credit.setAttribute('data-theme', themeName);
+        }
+        if (!credit.hasAttribute('href')) {
+          if (credit.textContent.trim() === 'Ynor') {
+            credit.href = 'https://ynor.app';
+            credit.target = '_blank';
+            credit.rel = 'noopener';
+          } else if (credit.textContent.trim() === 'Ronyman') {
+            credit.href = 'https://ronyman.com';
+            credit.target = '_blank';
+            credit.rel = 'noopener';
+          }
         }
       });
     };
@@ -56,8 +67,8 @@
                 <small class="footer__copyright">
                   {{- 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: '%Y' }},
                   {{ shop.name | link_to: routes.root_url }}. Powered by
-                  <span class="theme-credit" data-theme="carhoist-pro">Ynor</span>. Design and manage by
-                  <span class="theme-credit" data-theme="carhoist-pro">Ronyman</span>.
+                  <a href="https://ynor.app" target="_blank" rel="noopener" class="theme-credit" data-theme="carhoist-pro">Ynor</a>. Design and manage by
+                  <a href="https://ronyman.com" target="_blank" rel="noopener" class="theme-credit" data-theme="carhoist-pro">Ronyman</a>.
                 </small>
               </div>
             </div>
